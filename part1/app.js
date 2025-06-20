@@ -55,6 +55,17 @@ app.use(function (err, req, res, next) {
 // Initialize MySQL and insert test data
 (async () => {
   try {
+    // Connect to MySQL (no DB yet)
+    const connection = await mysql.createPool({
+      host: "localhost",
+      user: "doguser",
+      password: "dogpass", // your MySQL password
+    });
+
+    await connection.query("CREATE DATABASE IF NOT EXISTS DogWalkService");
+    await connection.end();
+
+    // Now connect to DogWalkService
     db = await mysql.createConnection({
       host: "localhost",
       user: "doguser",
