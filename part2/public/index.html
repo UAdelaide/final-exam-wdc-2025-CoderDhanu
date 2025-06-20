@@ -29,6 +29,30 @@
 
     <!-- <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
     <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a> -->
+    <div id="app" class="container py-5">
+  <h1 class="text-primary mb-4">All Registered Dogs!</h1>
+
+  <div v-if="loading" class="text-muted">Loading dogs...</div>
+  <div v-else>
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="dog in dogs" :key="dog.dog_id">
+          <td><img :src="dog.image" alt="Dog image" width="120" class="rounded"></td>
+          <td>{{ dog.dog_name }}</td>
+          <td>{{ dog.size }}</td>
+          <td>{{ dog.owner_username }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   </div>
 
   <script>
