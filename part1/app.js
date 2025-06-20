@@ -69,7 +69,7 @@ app.use(function(err, req, res, next) {
     db = await mysql.createConnection({
       host: 'localhost',
       user: 'doguser',
-      password: 'MudhMins',
+      password: 'dogpass',
       database: 'DogWalkService'
     });
 
