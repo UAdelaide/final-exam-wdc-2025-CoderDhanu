@@ -1,17 +1,15 @@
-const express = require("express");
-const router = express.Router();
-const db = require("../db");
+const router = require('express').Router();
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
+  const db = req.app.locals.db;
   try {
-    const [rows] = await db.query(`
+    const [rows] = await db.execute(`
       SELECT d.name AS dog_name, d.size, u.username AS owner_username
-      FROM Dogs d
-      JOIN Users u ON d.owner_id = u.user_id
+      FROM Dogs d JOIN Users u ON d.owner_id = u.user_id
     `);
     res.json(rows);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch dogs" });
+    res.status(500).json({ error: 'Error fetching dogs' });
   }
 });
 
