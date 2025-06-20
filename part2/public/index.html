@@ -64,6 +64,8 @@
         const email = ref('');
         const password = ref('');
         const error = ref(null);
+        const dogs = ref([]);
+        const loading = ref(true);
 
         const login = async () => {
           try {
