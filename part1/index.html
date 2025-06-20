@@ -47,7 +47,7 @@
 
         <div class="hidden-info">
             <p>Where is the button? Find it yourself 😈</p>
-            <button @click="() => supriseButton('')">Another button, what does this do? 🤯</button>
+            <button @click="() => supriseButton('Suprise')">Another button, what does this do?</button>
         </div>
     </div>
 
@@ -62,6 +62,10 @@
                     const res = await fetch('https://dog.ceo/api/breeds/image/random');
                     const data = await res.json();
                     dogUrl.value = data.message;
+                };
+
+                const supriseButton = (message) => {
+                    alert(message);
                 };
 
                 return { dogUrl, fetchDog };
