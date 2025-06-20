@@ -1,5 +1,5 @@
-const express = require("express")
-.Router();
+var express = require("express");
+var router = express.Router();
 
 router.get("/api/dogs", async (req, res) => {
   console.log("Fetching dogs...");
