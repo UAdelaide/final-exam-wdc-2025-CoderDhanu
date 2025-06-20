@@ -1,10 +1,10 @@
-// const mysql = require("mysql2/promise");
+const mysql = require("mysql2/promise");
 
-// const pool = mysql.createPool({
-//   host: "localhost",
-//   user: "alice123",
-//   password: "hashed123",
-//   database: "DogWalkService",
-// });
+const pool = mysql.createPool({
+  host: "localhost",
+  user: "doguser",
+  password: "dogpass",
+  database: "DogWalkService",
+});
 
-// module.exports = pool;
+module.exports = pool;
