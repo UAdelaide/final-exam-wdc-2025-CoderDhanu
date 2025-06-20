@@ -57,7 +57,6 @@ app.use(function (err, req, res, next) {
     await connection.query("CREATE DATABASE IF NOT EXISTS DogWalkService");
     await connection.end();
 
-    // Now connect to DogWalkService
     db = await mysql.createConnection({
       host: "localhost",
       user: "root",
@@ -65,7 +64,6 @@ app.use(function (err, req, res, next) {
       database: "DogWalkService",
     });
 
-    // Create Users table
     await db.execute(`
       CREATE TABLE IF NOT EXISTS Users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,7 +75,6 @@ app.use(function (err, req, res, next) {
       )
     `);
 
-    // Insert user data if table is empty
     const [userCount] = await db.execute("SELECT COUNT(*) AS count FROM Users");
     if (userCount[0].count === 0) {
       await db.execute(`
@@ -88,9 +85,7 @@ app.use(function (err, req, res, next) {
       `);
     }
 
-    // TODO: Add Dogs, WalkRequests, etc. in similar way...
-
-    app.locals.db = db; // Save db connection for route use
+    app.locals.db = db;
   } catch (err) {
     console.error("Failed to setup DogWalkService database:", err);
   }
