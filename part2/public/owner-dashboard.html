@@ -129,8 +129,18 @@
           window.location.href = '/index.html';
         };
 
+        async function loadDogs() {
+          try {
+            const res = await fetch('/api/dogs/my');
+            dogs.value = await res.json();
+          } catch (err) {
+            error.value = 'Failed to load dogs';
+          }
+        }
+
         onMounted(() => {
           loadWalks();
+          loadDogs();
         });
 
         return {
