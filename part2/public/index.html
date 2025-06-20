@@ -46,6 +46,7 @@
       </thead>
       <tbody>
         <tr v-for="dog in dogs" :key="dog.dog_id">
+          {{dog}}
           <td>{{ dog.dog_id }}</td>
           <td>{{ dog.dog_name }}</td>
           <td>{{ dog.dog_size }}</td>
@@ -118,7 +119,7 @@
         });
 
         return {
-          message: 'Welcome to the Dog Walking Service!', login, email, password, error
+          message: 'Welcome to the Dog Walking Service!', login, email, password, error, loading, dogs
         };
       }
     }).mount('#app');
