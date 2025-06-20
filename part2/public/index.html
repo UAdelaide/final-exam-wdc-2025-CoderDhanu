@@ -96,6 +96,12 @@
             const res = await fetch('/api/dogs');
             if (!res.ok) throw new Error('Failed to fetch dogs');
             const data = await res.json();
+
+            const dogsWithImages = await Promise.all(data.map(async dog => {
+            const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
+            const imgData = await imgRes.json();
+            return { ...dog, image: imgData.message };
+          }));
           } catch (err) {
             console.error(err);
             error.value = 'Error loading dogs';
