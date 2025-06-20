@@ -6,7 +6,7 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-router.get("/", async (req, res) => {
+router.get("/api/dogs", async (req, res) => {
   console.log("Fetching dogs...");
   const db = req.app.locals.db;
   try {
