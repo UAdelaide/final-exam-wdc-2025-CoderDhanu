@@ -46,4 +46,57 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// Initialize MySQL and insert test data
+(async () => {
+  try {
+    // Connect to MySQL (no DB yet)
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '' // your MySQL password
+    });
+
+    await connection.query('CREATE DATABASE IF NOT EXISTS DogWalkService');
+    await connection.end();
+
+    // Now connect to DogWalkService
+    db = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'DogWalkService'
+    });
+
+    // Create Users table
+    await db.execute(`
+      CREATE TABLE IF NOT EXISTS Users (
+        user_id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        role ENUM('owner', 'walker') NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    // Insert user data if table is empty
+    const [userCount] = await db.execute('SELECT COUNT(*) AS count FROM Users');
+    if (userCount[0].count === 0) {
+      await db.execute(`
+        INSERT INTO Users (username, email, password_hash, role) VALUES
+        ('alice123', 'alice@example.com', 'hashed123', 'owner'),
+        ('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
+        ('carol123', 'carol@example.com', 'hashed789', 'owner')
+      `);
+    }
+
+    // TODO: Add Dogs, WalkRequests, etc. in similar way...
+
+    app.locals.db = db; // Save db connection for route use
+
+  } catch (err) {
+    console.error('Failed to setup DogWalkService database:', err);
+  }
+})();
+
 module.exports = app;
