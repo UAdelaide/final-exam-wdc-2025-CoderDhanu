@@ -89,6 +89,18 @@
           }
         }
 
+        async function fetchDogs() {
+          try {
+            const res = await fetch('/api/users/dogs');
+            if (!res.ok) throw new Error('Failed to fetch dogs');
+            return await res.json();
+          } catch (err) {
+            console.error(err);
+            error.value = 'Error loading dogs';
+            return [];
+          }
+        }
+
         return {
           message: 'Welcome to the Dog Walking Service!', login, email, password, error
         };
