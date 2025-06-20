@@ -56,10 +56,10 @@ app.use(function (err, req, res, next) {
 (async () => {
   try {
     // Connect to MySQL (no DB yet)
-    const connection = await mysql.createPool({
+    const connection = await mysql.createConnection({
       host: "localhost",
-      user: "doguser",
-      password: "dogpass", // your MySQL password
+      user: "root",
+      password: "", // your MySQL password
     });
 
     await connection.query("CREATE DATABASE IF NOT EXISTS DogWalkService");
@@ -68,7 +68,7 @@ app.use(function (err, req, res, next) {
     // Now connect to DogWalkService
     db = await mysql.createConnection({
       host: "localhost",
-      user: "doguser",
+      user: "doguserootr",
       password: "dogpass",
       database: "DogWalkService",
     });
