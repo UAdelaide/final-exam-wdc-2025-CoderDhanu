@@ -57,4 +57,12 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/logout', (req, res) => {
+  console.log("req", req.session);
+  req.session.destroy(() => {
+    res.clearCookie('connect.sid');
+    res.json({ message: 'Logged out successfully' });
+  });
+});
+
 module.exports = router;
