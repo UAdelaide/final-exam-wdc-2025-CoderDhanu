@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 router.get("/api/dogs", async (req, res) => {
+  console.log("Fetching dogs...");
   const db = req.app.locals.db;
   try {
     const [rows] = await db.execute(`
