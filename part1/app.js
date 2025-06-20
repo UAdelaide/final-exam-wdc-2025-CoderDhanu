@@ -68,8 +68,8 @@ app.use(function (err, req, res, next) {
     // Now connect to DogWalkService
     db = await mysql.createConnection({
       host: "localhost",
-      user: "root",
-      password: "hashed123",
+      user: "doguser",
+      password: "dogpass",
       database: "DogWalkService",
     });
 
