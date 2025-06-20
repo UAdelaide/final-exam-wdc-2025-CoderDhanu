@@ -116,6 +116,11 @@
           }
         }
 
+        const logout = async () => {
+          await fetch('/users/logout', { method: 'POST' });
+          window.location.href = '/index.html';
+        };
+
         onMounted(() => {
           loadWalks();
         });

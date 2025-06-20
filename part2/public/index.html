@@ -63,11 +63,6 @@
           }
         }
 
-        const logout = async () => {
-          await fetch('/users/logout', { method: 'POST' });
-          window.location.href = '/index.html';
-        };
-
         return {
           message: 'Welcome to the Dog Walking Service!', login, email, password, error, logout
         };
