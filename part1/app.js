@@ -58,7 +58,7 @@ app.use(function (err, req, res, next) {
     // Connect to MySQL (no DB yet)
     const connection = await mysql.createConnection({
       host: "localhost",
-      user: "root",
+      user: "doguser",
       password: "MudhMins", // your MySQL password
     });
 
