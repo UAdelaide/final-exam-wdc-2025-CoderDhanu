@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-router.get("/api/dogs", async (req, res) => {
+router.get("/", async (req, res) => {
   console.log("Fetching dogs...");
   const db = req.app.locals.db;
   try {
