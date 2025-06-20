@@ -1,6 +1,6 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-router.get('/', async (req, res) => {
+router.get("/api/dogs", async (req, res) => {
   const db = req.app.locals.db;
   try {
     const [rows] = await db.execute(`
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    res.status(500).json({ error: 'Error fetching dogs' });
+    res.status(500).json({ error: "Error fetching dogs" });
   }
 });
 
