@@ -38,7 +38,7 @@ router.get("/routes/walkrequests", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/api/walkers/summary", async (req, res) => {
   console.log("Fetching walks...");
   const db = req.app.locals.db;
   try {
