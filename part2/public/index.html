@@ -101,6 +101,10 @@
           }
         }
 
+        onMounted(() => {
+          fetchDogs()
+        }),
+
         return {
           message: 'Welcome to the Dog Walking Service!', login, email, password, error
         };
