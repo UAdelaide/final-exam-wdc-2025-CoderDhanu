@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
   console.log("Fetching walks...");
   const db = req.app.locals.db;
   try {
-    const [rows] = await db.query(`
+    const [rows] = await db.execute(`
       SELECT u.username AS walker_username,
              COUNT(r.rating_id) AS total_ratings,
              ROUND(AVG(r.rating), 1) AS average_rating,

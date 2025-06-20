@@ -7,15 +7,15 @@ const mysql = require("mysql2/promise");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var dogsRoute = require("./routes/dogs");
-var walkRequestsRoute = require("./routes/walkrequests");
-var walkersRoute = require("./routes/walkers");
+// var dogsRoute = require("./routes/dogs");
+// var walkRequestsRoute = require("./routes/walkrequests");
+// var walkersRoute = require("./routes/walkers");
 
 var app = express();
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 let db;
 
 app.use(logger("dev"));
@@ -26,9 +26,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/api/dogs", dogsRoute);
-app.use("/api/walkrequests/open", walkRequestsRoute);
-app.use("/api/walkers/summary", walkersRoute);
+// app.use("/api/dogs", dogsRoute);
+// app.use("/api/walkrequests/open", walkRequestsRoute);
+// app.use("/api/walkers/summary", walkersRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
