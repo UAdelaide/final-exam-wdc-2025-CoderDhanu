@@ -46,14 +46,12 @@ app.use(function (err, req, res, next) {
   });
 });
 
-// Initialize MySQL and insert test data
 (async () => {
   try {
-    // Connect to MySQL (no DB yet)
     const connection = await mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "", // your MySQL password
+      password: "",
     });
 
     await connection.query("CREATE DATABASE IF NOT EXISTS DogWalkService");
