@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    res.status(500).json({ error: "Error fetching dogs" });
+    res.status(500).json({ error: "Error while fetching dogs" });
   }
 });
 
