@@ -59,7 +59,7 @@ app.use(function(err, req, res, next) {
     const connection = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password: '' // your MySQL password
+      password: 'MudhMins' // your MySQL password
     });
 
     await connection.query('CREATE DATABASE IF NOT EXISTS DogWalkService');
