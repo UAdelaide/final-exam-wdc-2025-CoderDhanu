@@ -51,7 +51,6 @@
         <button @click="supriseButton('You found the secret button!')">
           Another button, what does this do?
         </button>
-        {{openPopup}}
         <p v-if="openPopup">{{ popupMessage }}</p>
       </div>
     </div>
@@ -62,7 +61,7 @@
       createApp({
         setup() {
           const dogUrl = ref("");
-          const openPopup = False;
+          const openPopup = false;
           let popupMessage = ref("");
 
           const fetchDog = async () => {
@@ -74,7 +73,7 @@
           const supriseButton = (message) => {
             console.log("Surprise button clicked!");
             popupMessage.value = message;
-            openPopup.value = True;
+            openPopup.value = true;
           };
 
           return { dogUrl, fetchDog, supriseButton, openPopup, popupMessage };
