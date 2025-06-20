@@ -78,7 +78,7 @@
     createApp({
       setup() {
         const form = ref({
-          dog_name: [],
+          dog_id: '',
           requested_time: '',
           duration_minutes: '',
           location: ''
@@ -112,7 +112,7 @@
             message.value = result.message;
             error.value = '';
             form.value = {
-              dog_name: [],
+              dog_id: '',
               requested_time: '',
               duration_minutes: '',
               location: ''
