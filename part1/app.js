@@ -1,15 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const mysql = require('mysql2/promise');
+var createError = require("http-errors");
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
+const mysql = require("mysql2/promise");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var dogsRoute = require('./routes/dogs');
-var walkRequestsRoute = require('./routes/walkrequests');
-var walkersRoute = require('./routes/walkers');
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+var dogsRoute = require("./routes/dogs");
+var walkRequestsRoute = require("./routes/walkrequests");
+var walkersRoute = require("./routes/walkers");
 
 var app = express();
 
@@ -18,37 +18,37 @@ var app = express();
 // app.set('view engine', 'jade');
 let db;
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/api/dogs', dogsRoute);
-app.use('/api/walkrequests/open', walkRequestsRoute);
-app.use('/api/walkers/summary', walkersRoute);
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/api/dogs", dogsRoute);
+app.use("/api/walkrequests/open", walkRequestsRoute);
+app.use("/api/walkers/summary", walkersRoute);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
   // res.render('error');
   res.json({
     error: {
-      message: err.message || 'manual error',
-      status: err.status || 500
-    }
+      message: err.message || "manual error",
+      status: err.status || 500,
+    },
   });
 });
 
@@ -57,20 +57,20 @@ app.use(function(err, req, res, next) {
   try {
     // Connect to MySQL (no DB yet)
     const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: 'MudhMins' // your MySQL password
+      host: "localhost",
+      user: "root",
+      password: "MudhMins", // your MySQL password
     });
 
-    await connection.query('CREATE DATABASE IF NOT EXISTS DogWalkService');
+    await connection.query("CREATE DATABASE IF NOT EXISTS DogWalkService");
     await connection.end();
 
     // Now connect to DogWalkService
     db = await mysql.createConnection({
-      host: 'localhost',
-      user: 'doguser',
-      password: 'dogpass',
-      database: 'DogWalkService'
+      host: "localhost",
+      user: "alice123",
+      password: "hashed123",
+      database: "DogWalkService",
     });
 
     // Create Users table
@@ -86,7 +86,7 @@ app.use(function(err, req, res, next) {
     `);
 
     // Insert user data if table is empty
-    const [userCount] = await db.execute('SELECT COUNT(*) AS count FROM Users');
+    const [userCount] = await db.execute("SELECT COUNT(*) AS count FROM Users");
     if (userCount[0].count === 0) {
       await db.execute(`
         INSERT INTO Users (username, email, password_hash, role) VALUES
@@ -99,9 +99,8 @@ app.use(function(err, req, res, next) {
     // TODO: Add Dogs, WalkRequests, etc. in similar way...
 
     app.locals.db = db; // Save db connection for route use
-
   } catch (err) {
-    console.error('Failed to setup DogWalkService database:', err);
+    console.error("Failed to setup DogWalkService database:", err);
   }
 })();
 
