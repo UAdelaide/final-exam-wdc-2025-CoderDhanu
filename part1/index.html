@@ -1,77 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Dog of the Day - Cognitive Chaos Edition</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
-        body {
-            background-color: #16a8e1;
-            font-family: "Papyrus", cursive;
-            color: green;
-            padding: 100px;
-        }
+      body {
+        background-color: #16a8e1;
+        font-family: "Papyrus", cursive;
+        color: green;
+        padding: 100px;
+      }
 
-        button {
-            font-size: 2rem;
-            background-color: #ffff00;
-            color: red;
-            padding: 30px;
-            margin: 100px;
-        }
+      button {
+        font-size: 2rem;
+        background-color: #ffff00;
+        color: red;
+        padding: 30px;
+        margin: 100px;
+      }
 
-        img {
-            width: 95vw;
-            border: 10px groove green;
-        }
+      img {
+        width: 95vw;
+        border: 10px groove green;
+      }
 
-        .hidden-info {
-            margin-top: 2000px;
-            font-size: 18px;
-        }
+      .hidden-info {
+        margin-top: 2000px;
+        font-size: 18px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <h1>Doggie Dog World!</h1>
-        <button @click="fetchDog">I am not sure what this button does, click to find out</button>
+      <h1>Doggie Dog World!</h1>
+      <button @click="fetchDog">
+        I am not sure what this button does, click to find out
+      </button>
 
-        <div v-if="dogUrl">
-            <h2>Check out the Dog!</h2>
-            <img :src="dogUrl" alt="">
-            <p><strong>Name:</strong> Bark Bark!!</p>
-            <p><strong>Size:</strong> Is it a bear?</p>
-        </div>
+      <div v-if="dogUrl">
+        <h2>Check out the Dog!</h2>
+        <img :src="dogUrl" alt="" />
+        <p><strong>Name:</strong> Bark Bark!!</p>
+        <p><strong>Size:</strong> Is it a bear?</p>
+      </div>
 
-        <div class="hidden-info">
-            <p>Where is the button? Find it yourself 😈</p>
-            <button @click="() => supriseButton(openPopup)">Another button, what does this do?</button>
-        </div>
+      <div class="hidden-info">
+        <p>Where is the button? Find it yourself 😈</p>
+        <button @click="() => supriseButton(openPopup)">
+          Another button, what does this do?
+        </button>
+      </div>
     </div>
 
     <script>
-        const { createApp, ref } = Vue;
+      const { createApp, ref } = Vue;
 
-        createApp({
-            setup() {
-                const dogUrl = ref('');
+      createApp({
+        setup() {
+          const dogUrl = ref("");
+          const openPopup = "Surprise! This is a popup message!";
 
-                const fetchDog = async () => {
-                    const res = await fetch('https://dog.ceo/api/breeds/image/random');
-                    const data = await res.json();
-                    dogUrl.value = data.message;
-                };
+          const fetchDog = async () => {
+            const res = await fetch("https://dog.ceo/api/breeds/image/random");
+            const data = await res.json();
+            dogUrl.value = data.message;
+          };
 
-                const supriseButton = (message) => {
-                    window.alert(message);
-                };
+          const supriseButton = (message) => {
+            window.alert(message);
+          };
 
-                return { dogUrl, fetchDog };
-            }
-        }).mount('#app');
+          return { dogUrl, fetchDog };
+        },
+      }).mount("#app");
     </script>
-</body>
-
+  </body>
 </html>
