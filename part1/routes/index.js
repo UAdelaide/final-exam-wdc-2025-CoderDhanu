@@ -20,7 +20,7 @@ router.get("/api/dogs", async (req, res) => {
   }
 });
 
-router.get("/api/walkrequests", async (req, res) => {
+router.get("/api/walkrequests/open", async (req, res) => {
   console.log("Fetching walk requests...");
   const db = req.app.locals.db;
   try {
