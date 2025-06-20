@@ -48,7 +48,7 @@
 
       <div class="hidden-info">
         <p>Where is the button? Find it yourself 😈</p>
-        <button @click="() => supriseButton(openPopup)">
+        <button @click="() => supriseButton('You found the secret button!')">
           Another button, what does this do?
         </button>
       </div>
@@ -61,6 +61,7 @@
         setup() {
           const dogUrl = ref("");
           const openPopup = false;
+          const popupMessage = ref("");
 
           const fetchDog = async () => {
             const res = await fetch("https://dog.ceo/api/breeds/image/random");
@@ -69,7 +70,7 @@
           };
 
           const supriseButton = (message) => {
-            window.alert(message);
+
           };
 
           return { dogUrl, fetchDog };
