@@ -38,7 +38,7 @@ app.use(function(err, req, res, next) {
   // res.render('error');
   res.json({
     error: {
-      message: err.message || '',
+      message: err.message || 'manual error',
       status: err.status || 500
     }
   });
