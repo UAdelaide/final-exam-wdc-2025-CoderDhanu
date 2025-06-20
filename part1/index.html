@@ -60,7 +60,7 @@
       createApp({
         setup() {
           const dogUrl = ref("");
-          const openPopup = "Surprise! This is a popup message!";
+          const openPopup = false;
 
           const fetchDog = async () => {
             const res = await fetch("https://dog.ceo/api/breeds/image/random");
