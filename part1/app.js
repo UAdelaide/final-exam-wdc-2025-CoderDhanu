@@ -7,6 +7,9 @@ const mysql = require('mysql2/promise');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var dogsRoute = require('./routes/dogs');
+var walkRequestsRoute = require('./routes/walkrequests');
+var walkersRoute = require('./routes/walkers');
 
 var app = express();
 
