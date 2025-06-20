@@ -51,6 +51,7 @@
         <button @click="supriseButton('You found the secret button!')">
           Another button, what does this do?
         </button>
+        {{openPopup}}
         <p v-if="openPopup">{{ popupMessage }}</p>
       </div>
     </div>
