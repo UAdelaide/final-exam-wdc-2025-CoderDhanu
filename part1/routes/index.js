@@ -6,7 +6,7 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-router.get("/routes/dogs", async (req, res) => {
+router.get("/routes/walkrequests", async (req, res) => {
   console.log("Fetching walk requests...");
   const db = req.app.locals.db;
   try {
