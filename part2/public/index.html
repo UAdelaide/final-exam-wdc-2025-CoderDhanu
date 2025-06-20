@@ -10,7 +10,7 @@
 <body class="bg-light">
 
   <div id="app" class="container py-5">
-    <h1 class="mb-4 text-primary">{{ message }}</h1>
+    <h3 class="mb-4 text-primary">{{ message }}</h3>
     <p class="lead">Connect with trusted walkers for your beloved dog!</p>
 
     <form @submit.prevent="login">
@@ -45,7 +45,6 @@
         </thead>
         <tbody>
           <tr v-for="(dog, index) in dogs" :key="dog.dog_id">
-            {{dog}}
             <td>{{ index }}</td>
             <td>{{ dog.dog_name }}</td>
             <td>{{ dog.size }}</td>
