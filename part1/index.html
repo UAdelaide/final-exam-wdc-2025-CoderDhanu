@@ -62,7 +62,7 @@
         setup() {
           const dogUrl = ref("");
           const openPopup = false;
-          const popupMessage = ref("");
+          let popupMessage = ref("");
 
           const fetchDog = async () => {
             const res = await fetch("https://dog.ceo/api/breeds/image/random");
@@ -72,7 +72,7 @@
 
           const supriseButton = (message) => {
             popupMessage.value = message;
-            openPopup = true;
+            openPopup.value = true;
           };
 
           return { dogUrl, fetchDog, supriseButton, openPopup, popupMessage };
