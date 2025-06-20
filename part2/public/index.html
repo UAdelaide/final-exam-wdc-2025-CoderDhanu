@@ -55,6 +55,8 @@
               window.location.href = '/owner-dashboard.html';
             } else if (userRole === 'walker') {
               window.location.href = '/walker-dashboard.html';
+            } else {
+              error.value = 'Invalid user role.';
             }
           } catch (error) {
             error.value = 'Server error. Please try again.';
