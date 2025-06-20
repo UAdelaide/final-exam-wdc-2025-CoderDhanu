@@ -44,7 +44,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(dog, index) in dogs" :key="dog.dog_id">
+          <tr v-for="dog in dogs" :key="dog.dog_id">
             <td>{{ index+1 }}</td>
             <td>{{ dog.dog_name }}</td>
             <td>{{ dog.size }}</td>
