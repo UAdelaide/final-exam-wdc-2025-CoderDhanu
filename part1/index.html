@@ -1,71 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Dog of the Day - Cognitive Chaos Edition</title>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <style>
-    body {
-      background-color: #ff00ff;
-      font-family: "Papyrus", cursive;
-      color: #00ff00;
-      padding: 100px;
-    }
+    <meta charset="UTF-8">
+    <title>Dog of the Day - Cognitive Chaos Edition</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            background-color: #ff00ff;
+            font-family: "Papyrus", cursive;
+            color: #00ff00;
+            padding: 100px;
+        }
 
-    button {
-      font-size: 2rem;
-      background-color: #ffff00;
-      color: red;
-      padding: 30px;
-      margin: 100px;
-      border: 6px dashed blue;
-    }
+        button {
+            font-size: 2rem;
+            background-color: #ffff00;
+            color: red;
+            padding: 30px;
+            margin: 100px;
+            border: 6px dashed blue;
+        }
 
-    img {
-      width: 95vw;
-      border: 10px groove green;
-    }
+        img {
+            width: 95vw;
+            border: 10px groove green;
+        }
 
-    .hidden-info {
-      margin-top: 2000px;
-      font-size: 18px;
-    }
-  </style>
+        .hidden-info {
+            margin-top: 2000px;
+            font-size: 18px;
+        }
+    </style>
 </head>
+
 <body>
-  <div id="app">
-    <h1>Click for Dog, or Don’t — It’s Up to You!</h1>
-    <button @click="fetchDog">This button may or may not do something</button>
+    <div id="app">
+        <h1>Click for Dog, or Don’t — It’s Up to You!</h1>
+        <button @click="fetchDog">This button may or may not do something</button>
 
-    <div v-if="dogUrl">
-      <h2>Possibly Dog of the Day</h2>
-      <img :src="dogUrl" alt="">
-      <p><strong>Name:</strong> 👑 Lord Barkington of Wagtail</p>
-      <p><strong>Size:</strong> Hypermassive (probably)</p>
+        <div v-if="dogUrl">
+            <h2>Possibly Dog of the Day</h2>
+            <img :src="dogUrl" alt="">
+            <p><strong>Name:</strong> 👑 Lord Barkington of Wagtail</p>
+            <p><strong>Size:</strong> Hypermassive (probably)</p>
+        </div>
+
+        <div class="hidden-info">
+            <p>Try to guess where the secret button is!</p>
+            <button @click="() => alert('Surprise!')">Mystery Feature 🤯</button>
+        </div>
     </div>
 
-    <div class="hidden-info">
-      <p>Try to guess where the secret button is!</p>
-      <button @click="() => alert('Surprise!')">Mystery Feature 🤯</button>
-    </div>
-  </div>
+    <script>
+        const { createApp, ref } = Vue;
 
-  <script>
-    const { createApp, ref } = Vue;
+        createApp({
+            setup() {
+                const dogUrl = ref('');
 
-    createApp({
-      setup() {
-        const dogUrl = ref('');
+                const fetchDog = async () => {
+                    const res = await fetch('https://dog.ceo/api/breeds/image/random');
+                    const data = await res.json();
+                    dogUrl.value = data.message;
+                };
 
-        const fetchDog = async () => {
-          const res = await fetch('https://dog.ceo/api/breeds/image/random');
-          const data = await res.json();
-          dogUrl.value = data.message;
-        };
-
-        return { dogUrl, fetchDog };
-      }
-    }).mount('#app');
-  </script>
+                return { dogUrl, fetchDog };
+            }
+        }).mount('#app');
+    </script>
 </body>
+
 </html>
