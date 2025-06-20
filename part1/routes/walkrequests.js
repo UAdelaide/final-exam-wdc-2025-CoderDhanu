@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db");
 
 router.get("/", async (req, res) => {
+  console.log("Fetching walk requests...");
+  const db = req.app.locals.db;
   try {
     const [rows] = await db.query(`
       SELECT wr.request_id, d.name AS dog_name, wr.requested_time,
