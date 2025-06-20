@@ -131,7 +131,7 @@
 
         async function loadDogs() {
           try {
-            const res = await fetch('/api/dogs/my');
+            const res = await fetch('/api/dogs/my-dogs');
             console.log('dogs response', res);
             dogs.value = await res.json();
           } catch (err) {
