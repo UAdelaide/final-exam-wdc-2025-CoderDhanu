@@ -70,7 +70,7 @@ app.use(function (err, req, res, next) {
       host: "localhost",
       user: "root",
       password: "",
-      // database: "DogWalkService",
+      database: "DogWalkService",
     });
 
     // Create Users table
