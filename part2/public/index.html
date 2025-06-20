@@ -29,32 +29,32 @@
 
     <!-- <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
     <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a> -->
-  <h1 class="text-primary mb-4">All Registered Dogs!</h1>
+    <h1 class="text-primary mb-4">All Registered Dogs!</h1>
 
-  <div v-if="loading" class="text-muted">Loading dogs...</div>
-  <div v-else>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Dog ID</th>
-          <th>Name</th>
-          <th>Size</th>
-          <th>Owner ID</th>
-          <th>Photo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="dog in dogs" :key="dog.dog_id">
-          {{dog}}
-          <td>{{ dog.dog_id }}</td>
-          <td>{{ dog.dog_name }}</td>
-          <td>{{ dog.dog_size }}</td>
-          <td>{{ dog.id }}</td>
-          <td><img :src="dog.image" alt="Dog image" width="120" class="rounded"></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div v-if="loading" class="text-muted">Loading dogs...</div>
+    <div v-else>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Dog ID</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Owner ID</th>
+            <th>Photo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="dog in dogs" :key="dog.dog_id">
+            {{dog}}
+            <td>{{ dog.dog_id }}</td>
+            <td>{{ dog.dog_name }}</td>
+            <td>{{ dog.dog_size }}</td>
+            <td>{{ dog.id }}</td>
+            <td><img :src="dog.image" alt="Dog image" width="120" class="rounded"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
