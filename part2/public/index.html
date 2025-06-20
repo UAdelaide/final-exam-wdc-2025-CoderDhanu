@@ -1,129 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Dog Walking Service</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
-<body class="bg-light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dog Walking Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
 
-  <div id="app" class="container py-5">
-    <h3 class="mb-4">{{ message }}</h3>
-    <p class="lead">Connect with trusted walkers for your beloved dog!</p>
+  <body class="bg-light">
+    <div id="app" class="container py-5">
+      <h3 class="mb-4">{{ message }}</h3>
+      <p class="lead">Connect with trusted walkers for your beloved dog!</p>
 
-    <form @submit.prevent="login">
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input v-model="email" type="email" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input v-model="password" type="password" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Log In</button>
-    </form>
+      <form @submit.prevent="login">
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input v-model="email" type="email" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input
+            v-model="password"
+            type="password"
+            class="form-control"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Log In</button>
+      </form>
 
-    <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
+      <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
 
-    <!-- <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
+      <!-- <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
     <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a> -->
-    <h3 class="my-4">All Registered Dogs!</h3>
+      <h3 class="my-4">All Registered Dogs!</h3>
 
-    <div v-if="loading" class="text-muted">Loading dogs...</div>
-    <div v-else>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Dog ID</th>
-            <th>Name</th>
-            <th>Size</th>
-            <th>Owner ID</th>
-            <th>Photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="dog in dogs" :key="dog.dog_id">
-            <td>{{ dog.dog_id }}</td>
-            <td>{{ dog.dog_name }}</td>
-            <td>{{ dog.size }}</td>
-            <td>{{ dog.owner_id }}</td>
-            <td><img :src="dog.image" alt="Dog image" width="120" class="rounded"></td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-if="loading" class="text-muted">Loading dogs...</div>
+      <div v-else>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Dog ID</th>
+              <th>Name</th>
+              <th>Size</th>
+              <th>Owner ID</th>
+              <th>Photo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="dog in dogs" :key="dog.dog_id">
+              <td>{{ dog.dog_id }}</td>
+              <td>{{ dog.dog_name }}</td>
+              <td>{{ dog.size }}</td>
+              <td>{{ dog.owner_id }}</td>
+              <td>
+                <img
+                  :src="dog.image"
+                  alt="Dog image"
+                  width="120"
+                  class="rounded"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <script>
-    const { createApp, ref, onMounted } = Vue;
-    createApp({
-      setup() {
-        const email = ref('');
-        const password = ref('');
-        const error = ref(null);
-        const dogs = ref([]);
-        const loading = ref(true);
+    <script>
+      const { createApp, ref, onMounted } = Vue;
+      createApp({
+        setup() {
+          const email = ref("");
+          const password = ref("");
+          const error = ref(null);
+          const dogs = ref([]);
+          const loading = ref(true);
 
-        const login = async () => {
-          try {
-            const res = await fetch('/api/users/login', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email: email.value, password: password.value })
-            });
+          const login = async () => {
+            try {
+              const res = await fetch("/api/users/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  email: email.value,
+                  password: password.value,
+                }),
+              });
 
-            const data = await res.json();
-            console.log('response', data);
+              const data = await res.json();
+              console.log("response", data);
 
-            let userRole = data.user.role
-            if (userRole === 'owner') {
-              window.location.href = '/owner-dashboard.html';
-            } else if (userRole === 'walker') {
-              window.location.href = '/walker-dashboard.html';
-            } else {
-              error.value = 'Invalid user role.';
+              let userRole = data.user.role;
+              if (userRole === "owner") {
+                window.location.href = "/owner-dashboard.html";
+              } else if (userRole === "walker") {
+                window.location.href = "/walker-dashboard.html";
+              } else {
+                error.value = "Invalid user role.";
+              }
+            } catch (error) {
+              error.value = "Server error. Please try again.";
             }
-          } catch (error) {
-            error.value = 'Server error. Please try again.';
+          };
+
+          async function fetchDogs() {
+            try {
+              const res = await fetch("/api/users/dogs");
+              if (!res.ok) throw new Error("Failed to fetch dogs");
+              const data = await res.json();
+
+              const dogsWithImages = await Promise.all(
+                data.map(async (dog) => {
+                  const imgRes = await fetch(
+                    "https://dog.ceo/api/breeds/image/random"
+                  );
+                  const imgData = await imgRes.json();
+                  console.log("imgData", imgData);
+                  return { ...dog, image: imgData.message };
+                })
+              );
+              dogs.value = dogsWithImages;
+            } catch (err) {
+              console.error(err);
+              error.value = "Error loading dogs";
+              return [];
+            } finally {
+              loading.value = false;
+            }
           }
-        }
 
-        async function fetchDogs() {
-          try {
-            const res = await fetch('/api/users/dogs');
-            if (!res.ok) throw new Error('Failed to fetch dogs');
-            const data = await res.json();
+          onMounted(() => {
+            fetchDogs();
+          });
 
-            const dogsWithImages = await Promise.all(data.map(async dog => {
-              const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
-              const imgData = await imgRes.json();
-              console.log('imgData', imgData);
-              return { ...dog, image: imgData.message };
-            }));
-            dogs.value = dogsWithImages;
+          return {
+            message: "Welcome to the Dog Walking Service!",
+            login,
+            email,
+            password,
+            error,
+            loading,
+            dogs,
+          };
+        },
+      }).mount("#app");
+    </script>
 
-          } catch (err) {
-            console.error(err);
-            error.value = 'Error loading dogs';
-            return [];
-          } finally {
-            loading.value = false;
-          }
-        }
-
-        onMounted(() => {
-          fetchDogs()
-        });
-
-        return {
-          message: 'Welcome to the Dog Walking Service!', login, email, password, error, loading, dogs
-        };
-      }
-    }).mount('#app');
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
