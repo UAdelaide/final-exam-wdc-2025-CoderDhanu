@@ -81,6 +81,17 @@
           window.location.href = '/index.html';
         };
 
+        async function getCurrentUser() {
+          try {
+            const res = await fetch('/users/me');
+            if (!res.ok) throw new Error('Not logged in');
+            const user = await res.json();
+            walkerId.value = user.user_id;
+          } catch (err) {
+            error.value = 'Could not fetch current user';
+          }
+        }
+
         onMounted(() => {
           loadWalkRequests();
         });
