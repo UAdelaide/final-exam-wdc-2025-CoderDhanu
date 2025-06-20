@@ -6,7 +6,7 @@ const app = express();
 const session = require('express-session');
 
 app.use(session({
-  secret: 'paste-your-random-string-here',
+  secret: 'VmSsaabJOR28eB4UwR8CfbgMZPWqZJXxfpzjEpD6pT4='
 }));
 
 // Middleware
