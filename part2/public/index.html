@@ -108,6 +108,8 @@
             console.error(err);
             error.value = 'Error loading dogs';
             return [];
+          } finally {
+            loading.value = false;
           }
         }
 
