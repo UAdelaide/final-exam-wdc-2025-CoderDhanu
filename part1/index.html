@@ -51,6 +51,7 @@
         <button @click="() => supriseButton('You found the secret button!')">
           Another button, what does this do?
         </button>
+        
       </div>
     </div>
 
@@ -70,7 +71,8 @@
           };
 
           const supriseButton = (message) => {
-
+            popupMessage.value = message;
+            openPopup = true;
           };
 
           return { dogUrl, fetchDog };
